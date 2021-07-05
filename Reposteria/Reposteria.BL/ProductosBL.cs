@@ -19,7 +19,12 @@ namespace Reposteria.BL
 
         public List<Producto> ObtenerProductos()
         {
-            ListadeProductos = _contexto.Productos.ToList();
+            ListadeProductos = _contexto.Productos
+                .Include("Categoria")
+                .OrderBy(r => r.Categoria.Descripcion)
+                .ThenBy(r => r.Descripcion)
+                .ToList();
+
             return ListadeProductos;
         }
 
@@ -33,7 +38,9 @@ namespace Reposteria.BL
             {
                 var productoExistente = _contexto.Productos.Find(producto.Id);
                 productoExistente.Descripcion = producto.Descripcion;
+                productoExistente.CategoriaId = producto.CategoriaId;
                 productoExistente.Precio = producto.Precio;
+                productoExistente.UrlImage = producto.UrlImage;
             }
             
             _contexto.SaveChanges();
@@ -41,7 +48,8 @@ namespace Reposteria.BL
 
         public Producto ObtenerProducto(int id)
         {
-            var producto = _contexto.Productos.Find(id);
+            var producto = _contexto.Productos
+                .Include("Categoria").FirstOrDefault(p => p.Id == id);
 
             return producto;
         }
