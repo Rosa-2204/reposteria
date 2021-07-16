@@ -31,7 +31,7 @@ namespace Reposteria.WebAdmin.Controllers
             var nuevoProducto = new Producto();
             var categorias = _categoriasBL.ObtenerCategorias();
 
-            ViewBag.ListaCategorias = new SelectList(categorias, "Id", "Descripcion");
+            ViewBag.CategoriasId = new SelectList(categorias, "Id", "Descripcion");
 
             return View(nuevoProducto);
         }
