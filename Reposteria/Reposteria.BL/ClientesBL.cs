@@ -38,7 +38,7 @@ namespace Reposteria.BL
         }
 
         public void GuardarCliente(Cliente cliente)
-        {
+        { 
             if (cliente.Id == 0)
             {
                 _contexto.Clientes.Add(cliente);
