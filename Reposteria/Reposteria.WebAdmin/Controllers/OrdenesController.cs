@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Reposteria.WebAdmin.Controllers
 {
+    [Authorize]
     public class OrdenesController : Controller
     {
         OrdenesBL _ordenesBL;
